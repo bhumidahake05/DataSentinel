@@ -1,0 +1,23 @@
+name: sample_data_quality
+source: data/sample.csv
+
+rules:
+  - type: null_check
+    column: name
+    parameters:
+      allowed_nulls: 0
+
+  - type: unique_check
+    column: id
+    parameters: {}
+
+  - type: range
+    column: age
+    parameters:
+      min: 18
+      max: 60
+
+  - type: regex
+    column: name
+    parameters:
+      pattern: "^[A-Za-z ]+$"

@@ -1,0 +1,52 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "datasentinel"
+version = "0.1.0"
+description = "Automated Data Quality & Pipeline Monitoring Platform"
+requires-python = ">=3.12"
+dependencies = [
+    "typer",
+    "rich",
+    "pandas>=2.1",
+    "numpy",
+    "sqlalchemy>=2.0",
+    "pyyaml",
+    "pydantic>=2.0",
+    "jinja2",
+    "weasyprint",
+    "httpx",
+    "APScheduler>=3.10,<4.0",
+    "types-reportlab",
+    "reportlab"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pytest-cov",
+    "hypothesis",
+    "mypy"
+]
+
+[project.scripts]
+datasentinel = "datasentinel.cli:app"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+
+[[tool.mypy.overrides]]
+module = ["weasyprint"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["apscheduler.*"]
+ignore_missing_imports = true

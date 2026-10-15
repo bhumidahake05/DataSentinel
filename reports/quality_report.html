@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DataSentinel Quality Report</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+
+        h1 {
+            margin-bottom: 5px;
+        }
+
+        .summary {
+            margin: 20px 0;
+        }
+
+        .card {
+            display: inline-block;
+            padding: 20px;
+            margin-right: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .chart-container {
+            width: 80%;
+            margin: 30px auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>DataSentinel Quality Report</h1>
+
+    <p>4 rules passed and 0 rules failed.</p>
+
+    <div class="summary">
+
+        <div class="card">
+            <strong>Total Rules</strong>
+            <br>
+            4
+        </div>
+
+        <div class="card">
+            <strong>Passed Rules</strong>
+            <br>
+            4
+        </div>
+
+        <div class="card">
+            <strong>Failed Rules</strong>
+            <br>
+            0
+        </div>
+
+        <div class="card">
+            <strong>Total Anomalies</strong>
+            <br>
+            
+        </div>
+
+    </div>
+
+    <div class="chart-container">
+        <h2>Rule Pass Rate</h2>
+        <canvas id="passRateChart"></canvas>
+    </div>
+
+    <div class="chart-container">
+        <h2>Anomaly Trend</h2>
+        <canvas id="anomalyTrendChart"></canvas>
+    </div>
+
+    <h2>Rule Results</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Rule</th>
+                <th>Column</th>
+                <th>Status</th>
+                <th>Violations</th>
+                <th>Message</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            
+        </tbody>
+    </table>
+
+    <script>
+        const passRateLabels = {pass_rate_labels,tojson };
+        const passRateValues = { pass_rate_values,tojson };
+
+        const anomalyLabels = { anomaly_labels,tojson };
+        const anomalyValues = { anomaly_value,tojson };
+
+        new Chart(
+            document.getElementById("passRateChart"),
+            {
+                type: "bar",
+                data: {
+                    labels: passRateLabels,
+                    datasets: [
+                        {
+                            label: "Pass Rate (%)",
+                            data: passRateValues
+                        }
+                    ]
+                }
+            }
+        );
+
+        new Chart(
+            document.getElementById("anomalyTrendChart"),
+            {
+                type: "line",
+                data: {
+                    labels: anomalyLabels,
+                    datasets: [
+                        {
+                            label: "Anomalies",
+                            data: anomalyValues,
+                            fill: false
+                        }
+                    ]
+                }
+            }
+        );
+    </script>
+
+</body>
+</html>
